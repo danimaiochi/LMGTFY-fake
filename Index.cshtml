@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+@{
+    if (IsPost)
+    {
+        string filename = @"C:\Users\daniel.maiochi\Documents\Visual Studio 2012\WebSites\WebSite1\LMGTFY-fake\conf.bd";
+        int id = ((int)File.ReadLines(filename).Count())+1;
+        File.AppendAllText(filename, id+"|");
+        File.AppendAllText(filename, Request.Form["fake"]+ "|");
+        File.AppendAllText(filename, Request.Form["real"]+ "\n");
+
+        Response.Write("http://bnu-danielm/search/Envio?q=" + id);
+    }
+    if (Request.QueryString["q"] != null)
+    {
+        string hidden = "";
+        string search = "";
+        string line;
+        string[] parameters;
+
+        System.IO.StreamReader file = new System.IO.StreamReader("conf.bd");
+        while ((line = file.ReadLine()) != null)
+        {
+            parameters = line.Split('|');
+            if (parameters[0] == Request.QueryString["q"])
+            {
+                search = parameters[1];
+                hidden = parameters[2];
+            }
+        }
+        file.Dispose();
+        file.Close();
+        Response.Redirect("Envio?q="+search);
+    }
+}
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <form id="form1" runat="server" action="Index" method="post">
+            <div>
+                Mostra <input type="text" name="fake" title="busca" autocomplete="off" required />
+                <br />
+                Aparece <input type="text" name="real" title="busca" autocomplete="off" required />
+                <br />
+                <input type="submit" value="Vai" />
+            </div>
+        </form>
+    </body>
+</html>

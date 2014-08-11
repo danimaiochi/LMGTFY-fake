@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0018)http://lmgtfy.com/ -->
+@{
+	string hidden = "";
+	string search = "";
+	string line;
+	string[] parameters;
+
+    string filename = @"C:\Users\daniel.maiochi\Documents\Visual Studio 2012\WebSites\WebSite1\LMGTFY-fake\conf.bd";
+	System.IO.StreamReader file = new System.IO.StreamReader(filename);
+	while ((line = file.ReadLine()) != null)
+	{
+		parameters = line.Split('|');
+		if (parameters[0] == Request.QueryString["q"])
+		{
+			search = parameters[1];
+			hidden = parameters[2];
+			
+		}
+	}
+	file.Close();
+	file.Dispose();
+	Response.Write(Html.Hidden("hidden-term",hidden));
+	Response.Write(Html.Hidden("busca", search));
+}
+<html class="">
+<head>	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="For all those people who find it more convenient to bother you with their question rather than google it for themselves." name="description">
+	<title>Let me google that for you</title>
+	<link href="application-933639330a3e006d6afbe30653d1ce38.css" media="all" rel="stylesheet">
+	<script src="jquery.min.js">
+	</script>
+	<style type="text/css"></style>
+	<script src="application-e7cfac3cdc61899426606b5b3e782f63.js"></script>
+	<link href="css" rel="stylesheet" type="text/css">
+	<script src="links-eeb0e05bcf15d8c843f393aff4b6d122.js"></script>
+	<style type="text/css">.fancybox-margin{margin-right:17px;}</style>
+</head>
+<body>
+	<div class="modal" id="more-languages"></div>
+	<center class="primary">
+		<div class="logo">
+			<span rel="localize[pre_logo]">Permita-me usar o</span>
+			<img id="logo" src="logo11w.png" style="opacity: 1;">
+			<span rel="localize[post_logo]">pra você</span>
+		</div>
+		<form class="search form-group">
+			<div class="form-group">
+			<input class="form-control input-sm" id="search-term" size="55" title="Google Search" type="text" value="">
+			<input class="btn btn-sm btn-default" id="search" rel="localize[search_button]" type="button" value="Pesquisa Google">
+			</div>
+		</form>
+		<div id="alert" style="display:none; color:#666;"></div>
+		<div id="instructions">Digite a pergunta, clique em um botão.</div>
+		<div id="link_placeholder"></div>
+		<div id="link"><input class="link copyable" readonly="" type="text">
+		<div id="link_message" style="display: none;"></div>
+		<div id="link_buttons" style="display: none;">
+		<a class="link_button" href="http://lmgtfy.com/#" id="copy" rel="localize[link.copy]">copiar</a>
+		<a class="link_button" href="http://lmgtfy.com/#" id="reset" rel="localize[link.reset]">refazer</a>
+		<a class="link_button" href="http://lmgtfy.com/#" id="shorten" rel="localize[link.shorten]">shorten</a>
+		<a class="link_button" href="http://lmgtfy.com/#" id="go" rel="localize[link.go]">ir</a>
+		</div></div>
+		
+		</div><p>
+<a class="again" href="http://lmgtfy.com/#">Play it again</a> or 
+</p>
+</div>
+</center>
+<div id="footer">
+<img alt="Mouse arrow windows aero" id="fake_mouse" src="mouse_arrow_windows_aero-b118000dc97d4558d6db021793acc613.png" style="display: none">
+</div>
+</body>
+</html>
